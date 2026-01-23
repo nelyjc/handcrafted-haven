@@ -6,3 +6,4 @@ Project WDD430 Team 17
 - Caleb Beardall  
 - Nely Jazmin Crespin  
 - Rommel Ariel Juarez
+-Karen Paz Castillo
