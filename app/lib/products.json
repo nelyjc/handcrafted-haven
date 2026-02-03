@@ -1,0 +1,182 @@
+[
+    {
+        "id": 1,
+        "name": "Product 1",
+        "title": "Handmade Item 1",
+        "slug": "handmade-item-1",
+        "price": 24.0,
+        "category": "Ceramics",
+        "availability": "Ready to ship",
+        "image": "https://placehold.co/600x600?text=Product+1"
+    },
+    {
+        "id": 2,
+        "name": "Product 2",
+        "title": "Handmade Item 2",
+        "slug": "handmade-item-2",
+        "price": 32.5,
+        "category": "Textiles",
+        "availability": "Custom order",
+        "image": "https://placehold.co/600x600?text=Product+2"
+    },
+    {
+        "id": 3,
+        "name": "Product 3",
+        "title": "Handmade Item 3",
+        "slug": "handmade-item-3",
+        "price": 18.0,
+        "category": "Woodwork",
+        "availability": "Ready to ship",
+        "image": "https://placehold.co/600x600?text=Product+3"
+    },
+    {
+        "id": 4,
+        "name": "Product 4",
+        "title": "Handmade Item 4",
+        "slug": "handmade-item-4",
+        "price": 45.0,
+        "category": "Ceramics",
+        "availability": "Custom order",
+        "image": "https://placehold.co/600x600?text=Product+4"
+    },
+    {
+        "id": 5,
+        "name": "Product 5",
+        "title": "Handmade Item 5",
+        "slug": "handmade-item-5",
+        "price": 27.0,
+        "category": "Textiles",
+        "availability": "Ready to ship",
+        "image": "https://placehold.co/600x600?text=Product+5"
+    },
+    {
+        "id": 6,
+        "name": "Product 6",
+        "title": "Handmade Item 6",
+        "slug": "handmade-item-6",
+        "price": 60.0,
+        "category": "Woodwork",
+        "availability": "Ready to ship",
+        "image": "https://placehold.co/600x600?text=Product+6"
+    },
+    {
+        "id": 7,
+        "name": "Product 7",
+        "title": "Handmade Item 7",
+        "slug": "handmade-item-7",
+        "price": 15.0,
+        "category": "Ceramics",
+        "availability": "Custom order",
+        "image": "https://placehold.co/600x600?text=Product+7"
+    },
+    {
+        "id": 8,
+        "name": "Product 8",
+        "title": "Handmade Item 8",
+        "slug": "handmade-item-8",
+        "price": 22.5,
+        "category": "Textiles",
+        "availability": "Ready to ship",
+        "image": "https://placehold.co/600x600?text=Product+8"
+    },
+    {
+        "id": 9,
+        "name": "Product 9",
+        "title": "Handmade Item 9",
+        "slug": "handmade-item-9",
+        "price": 38.0,
+        "category": "Woodwork",
+        "availability": "Ready to ship",
+        "image": "https://placehold.co/600x600?text=Product+9"
+    },
+    {
+        "id": 10,
+        "name": "Product 10",
+        "title": "Handmade Item 10",
+        "slug": "handmade-item-10",
+        "price": 29.0,
+        "category": "Ceramics",
+        "availability": "Custom order",
+        "image": "https://placehold.co/600x600?text=Product+10"
+    },
+    {
+        "id": 11,
+        "name": "Product 11",
+        "title": "Handmade Item 11",
+        "slug": "handmade-item-11",
+        "price": 19.5,
+        "category": "Textiles",
+        "availability": "Ready to ship",
+        "image": "https://placehold.co/600x600?text=Product+11"
+    },
+    {
+        "id": 12,
+        "name": "Product 12",
+        "title": "Handmade Item 12",
+        "slug": "handmade-item-12",
+        "price": 55.0,
+        "category": "Woodwork",
+        "availability": "Ready to ship",
+        "image": "https://placehold.co/600x600?text=Product+12"
+    },
+    {
+        "id": 13,
+        "name": "Product 13",
+        "title": "Handmade Item 13",
+        "slug": "handmade-item-13",
+        "price": 33.0,
+        "category": "Ceramics",
+        "availability": "Custom order",
+        "image": "https://placehold.co/600x600?text=Product+13"
+    },
+    {
+        "id": 14,
+        "name": "Product 14",
+        "title": "Handmade Item 14",
+        "slug": "handmade-item-14",
+        "price": 21.0,
+        "category": "Textiles",
+        "availability": "Ready to ship",
+        "image": "https://placehold.co/600x600?text=Product+14"
+    },
+    {
+        "id": 15,
+        "name": "Product 15",
+        "title": "Handmade Item 15",
+        "slug": "handmade-item-15",
+        "price": 47.0,
+        "category": "Woodwork",
+        "availability": "Ready to ship",
+        "image": "https://placehold.co/600x600?text=Product+15"
+    },
+    {
+        "id": 16,
+        "name": "Product 16",
+        "title": "Handmade Item 16",
+        "slug": "handmade-item-16",
+        "price": 17.0,
+        "category": "Ceramics",
+        "availability": "Custom order",
+        "image": "https://placehold.co/600x600?text=Product+16"
+    },
+    {
+        "id": 17,
+        "name": "Product 17",
+        "title": "Handmade Item 17",
+        "slug": "handmade-item-17",
+        "price": 26.0,
+        "category": "Textiles",
+        "availability": "Ready to ship",
+        "image": "https://placehold.co/600x600?text=Product+17"
+    },
+    {
+        "id": 18,
+        "name": "Product 18",
+        "title": "Handmade Item 18",
+        "slug": "handmade-item-18",
+        "price": 39.0,
+        "category": "Woodwork",
+        "availability": "Ready to ship",
+        "image": "https://placehold.co/600x600?text=Product+18"
+    }
+]
