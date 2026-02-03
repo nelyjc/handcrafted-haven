@@ -1,16 +1,24 @@
 "use client";
 import { useState } from "react";
+
+import Image from "next/image";
+import Link from "next/link";
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="border-b border-black/10 dark:border-white/20">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between p-4 sm:p-6">
-        
-        <a href="#" className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
-          Handcrafted Haven
-        </a>
-
+          <Link href="/" className="relative h-30 w-[200px]">
+          <Image
+            src="/logo.png"
+            alt="Handcrafted Haven logo"
+            fill
+            className="object-contain"
+            priority
+          />
+        </Link>
         <div className="hidden items-center gap-6 text-sm sm:flex">
           <a href="./" className="text-zinc-700 hover:underline dark:text-zinc-300">Home</a>
           <a href="./products" className="text-zinc-700 hover:underline dark:text-zinc-300">Store</a>
