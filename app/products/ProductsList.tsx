@@ -32,7 +32,7 @@ export default async function ProductsList({ page = 1, pageSize = 9 }: { page?: 
                             <div className="text-sm font-medium">${product.price.toFixed(2)}</div>
                             <div className="flex gap-2">
                                 <button className="rounded-md bg-neutral-100 p-2 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-200">Add to cart</button>
-                                <a href={`/products/${product.slug}`} className="rounded-md bg-neutral-900 p-2 text-white dark:bg-white dark:text-neutral-900">View</a>
+                                <a href={`/products/${product.id}`} className="rounded-md bg-neutral-900 p-2 text-white dark:bg-white dark:text-neutral-900">View</a>
                             </div>
                         </div>
                     </div>
