@@ -17,10 +17,10 @@ export default async function ProductsList({ page = 1, pageSize = 9 }: { page?: 
 
     return (
         <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {pageProducts.map((product) => (
                     <div key={product.id} className="flex flex-col gap-3 rounded-md bg-neutral-50 p-3 dark:bg-neutral-900/60">
-                        <div className="flex aspect-square items-center justify-center overflow-hidden rounded-md bg-neutral-100 dark:bg-neutral-800">
+                        <div className="aspect-square overflow-hidden rounded-md bg-neutral-100 dark:bg-neutral-800">
                             <img src={product.image} alt={product.title} className="h-full w-full object-cover" />
                         </div>
                         <div className="space-y-1">
@@ -31,7 +31,7 @@ export default async function ProductsList({ page = 1, pageSize = 9 }: { page?: 
                         <div className="mt-auto flex items-center justify-between gap-2 text-xs">
                             <div className="text-sm font-medium">${product.price.toFixed(2)}</div>
                             <div className="flex gap-2">
-                                <button className="rounded-md bg-neutral-100 p-2 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-200">Add to cart</button>
+                                <button className="rounded-md bg-neutral-100 p-2 dark:bg-neutral-800">Add to cart</button>
                                 <a href={`/products/${product.id}`} className="rounded-md bg-neutral-900 p-2 text-white dark:bg-white dark:text-neutral-900">View</a>
                             </div>
                         </div>
