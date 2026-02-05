@@ -1,7 +1,7 @@
 export default function ProductsSkeleton({ pageSize = 9 }: { pageSize?: number }) {
     return (
         <div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {Array.from({ length: pageSize }).map((_, i) => (
                     <div key={i} className="flex flex-col gap-3 rounded-md bg-neutral-50 p-3 dark:bg-neutral-900/60">
                         <div className="flex aspect-square items-center justify-center overflow-hidden rounded-md bg-neutral-200 dark:bg-neutral-800 animate-pulse" />

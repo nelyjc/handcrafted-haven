@@ -17,7 +17,7 @@ export default async function ProductsList({ page = 1, pageSize = 9 }: { page?: 
 
     return (
         <>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {pageProducts.map((product) => (
                     <div key={product.id} className="flex flex-col gap-3 rounded-md bg-neutral-50 p-3 dark:bg-neutral-900/60">
                         <div className="flex aspect-square items-center justify-center overflow-hidden rounded-md bg-neutral-100 dark:bg-neutral-800">
