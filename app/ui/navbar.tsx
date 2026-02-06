@@ -20,10 +20,9 @@ export default function Navbar() {
           />
         </Link>
         <div className="hidden items-center gap-6 text-sm sm:flex">
-          <a href="#" className="text-zinc-700 hover:underline dark:text-zinc-300">Home</a>
-          
-          <a href="#" className="text-zinc-700 hover:underline dark:text-zinc-300">Store</a>
-          <a href="#" className="text-zinc-700 hover:underline dark:text-zinc-300">Account</a>
+          <a href="./" className="text-zinc-700 hover:underline dark:text-zinc-300">Home</a>
+          <a href="./products" className="text-zinc-700 hover:underline dark:text-zinc-300">Store</a>
+          <a href="./profile" className="text-zinc-700 hover:underline dark:text-zinc-300">Account</a>
         </div>
 
         <button
