@@ -1,5 +1,6 @@
 import productsData from "../lib/products.json";
 import Pagination from "./Pagination";
+import { StarRating } from "./ProductRating";
 
 async function wait(ms: number) {
     return new Promise((res) => setTimeout(res, ms));
@@ -23,6 +24,9 @@ export default async function ProductsList({ page = 1, pageSize = 9 }: { page?: 
                         <div className="aspect-square overflow-hidden rounded-md bg-neutral-100 dark:bg-neutral-800">
                             <img src={product.image} alt={product.title} className="h-full w-full object-cover" />
                         </div>
+                        <div className="mt-1">
+                        <StarRating rating={Number(product.average_rating)} count={product.review_count} /></div>
+                        
                         <div className="space-y-1">
                             <span className="text-xs text-neutral-400 dark:text-neutral-500">{product.name}</span>
                             <br />
