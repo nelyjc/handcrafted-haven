@@ -21,12 +21,12 @@ export function StarRating({
         ))}
       </span>
 
-      {/* ✅ Numeric rating */}
+      {/*  Numeric rating */}
       <span className="text-zinc-700 dark:text-zinc-200">
         {rounded.toFixed(1)}
       </span>
 
-      {/* ✅ Review count */}
+      {/*  Review count */}
       {count !== undefined && (
         <span className="text-zinc-500">({count})</span>
       )}
