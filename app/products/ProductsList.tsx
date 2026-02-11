@@ -2,6 +2,7 @@ import productsData from "../lib/products.json";
 import Pagination from "./Pagination";
 import { StarRating } from "./ProductRating";
 
+
 async function wait(ms: number) {
     return new Promise((res) => setTimeout(res, ms));
 }
