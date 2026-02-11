@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import CartButton from "./CartButton";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,7 +67,8 @@ export default function Navbar() {
             </Link>
           </div>
         </div>
-
+          
+    <CartButton />
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="flex flex-col gap-1.5 sm:hidden p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10 transition"

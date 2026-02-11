@@ -1,6 +1,8 @@
 import productsData from "../lib/products.json";
+import AddToCartButton from "./[id]/AddToCartButton";
 import Pagination from "./Pagination";
 import { StarRating } from "./ProductRating";
+
 
 
 async function wait(ms: number) {
@@ -38,7 +40,14 @@ export default async function ProductsList({ page = 1, pageSize = 9 }: { page?: 
                         <div className="mt-auto flex items-center justify-between gap-2 text-xs">
                             <div className="text-sm font-medium">${product.price.toFixed(2)}</div>
                             <div className="flex gap-2">
-                                <button className="rounded-md bg-neutral-100 p-2 dark:bg-neutral-800">Add to cart</button>
+                                <AddToCartButton
+                                product={{
+                                    id: product.id,
+                                    name: product.name,
+                                    price: Number(product.price),
+                                    image: product.image,
+                                }}
+                                />
                                 <a href={`/products/${product.id}`} className="rounded-md bg-neutral-900 p-2 text-white dark:bg-white dark:text-neutral-900">View</a>
                             </div>
                         </div>
