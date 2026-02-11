@@ -1,10 +1,14 @@
+// app/products/[id]/page.tsx
 import productsData from "../../lib/products.json";
+import { StarRating } from "@/app/ui/startratings";
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
     const sp = await params;
     const id = sp.id;
     const products = productsData as Array<any>;
     const product = products.find((p) => String(p.id) === id);
+
+
 
     if (!product) {
         return (
@@ -34,6 +38,8 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                         <div className="text-xs text-neutral-400 dark:text-neutral-500">{product.category}</div>
                         <h1 className="mt-1 text-2xl font-semibold">{product.title}</h1>
                         <div className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{product.name}</div>
+                        {/* star rating */}
+                        <StarRating rating={product.rating ?? 0} count={product.review_count ?? undefined} />
                     </div>
 
                     <div className="mt-2">
