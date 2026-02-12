@@ -15,7 +15,7 @@ export default function ProductDevPage() {
         name: "Test Product – Clay Spoon Rest",
         price: 1299,
         category: "ceramic",
-        image: "/products/test-clay-spoon-rest.png",
+        image: "/products/product-placeholder.png",
         shortDescription: "A small hand-thrown spoon rest for the stovetop.",
         longDescription:
           "Wheel-thrown in small batches and finished with a soft glaze. Perfect for keeping counters clean while cooking.",
