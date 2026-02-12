@@ -36,7 +36,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                         <h1 className="mt-1 text-2xl font-semibold">{product.name}</h1>
                         <div className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{product.short_description}</div>
                         {/* star rating */}
-                        <StarRating rating={product.rating ?? 0} count={product.review_count ?? undefined} />
+                        {/* <StarRating rating={product.rating ?? 0} count={product.review_count ?? undefined} /> */}
+                        {/* No rating and reviews implemented yet */}
+                        <StarRating rating={0} count={undefined} />
                     </div>
 
                     <div className="mt-2">

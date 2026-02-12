@@ -5,7 +5,9 @@ import ProductsFilters from "./ProductsFilters";
 import SearchSort from "./SearchSort";
 import { getAllProducts, getAllProductsPaginated } from "../lib/products";
 
-export default async function ProductsPage({ searchParams }: { searchParams?: Promise<{ page?: string }> | { page?: string } }) {
+type SearchParams = Record<string, string | string[] | undefined> | Promise<Record<string, string | string[] | undefined>>;
+
+export default async function ProductsPage({ searchParams }: { searchParams?: SearchParams }) {
     const sp = await searchParams;
     const page = Math.max(1, Number(sp?.page || 1));
     const pageSize = 9;
