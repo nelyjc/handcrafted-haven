@@ -1,13 +1,20 @@
 "use client";
-import { createProduct } from '@/app/lib/actions';
+import { useFormState } from "react-dom";
+import { createDashboardProduct, type ActionState } from "@/app/lib/actions";
+
+const initialState: ActionState = { ok : false, message: "" };
 
 
 export function Form() {
+  const [state, formAction] = useFormState(createDashboardProduct, initialState);
+  console.error(state);
+
   return (
 <div>
       <h1 className="text-2xl font-bold">Add Product</h1>
+      {!state.ok && state.message && <p className="text-red-500">{state.message}</p>}
       <form
-        action={createProduct}
+        action={formAction}
         className="space-y-4 rounded-lg border p-6 slate-100 shadow-md"
       >
         <div>
