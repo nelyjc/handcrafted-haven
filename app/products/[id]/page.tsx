@@ -1,6 +1,7 @@
 // app/products/[id]/page.tsx
 import productsData from "../../lib/products.json";
 import { StarRating } from "@/app/ui/startratings";
+import AddToCartButton from "./AddToCartButton";
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
     const sp = await params;
@@ -48,7 +49,15 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                     </div>
 
                     <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-                        <button className="w-full rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white dark:bg-white dark:text-neutral-900 sm:w-auto">Add to cart</button>
+                    <AddToCartButton
+                        product={{
+                            id: product.id,
+                            name: product.name,
+                            price: Number(product.price),
+                            image: product.image,
+                        }}
+                        />
+
                         <a href="/products" className="w-full rounded-md border border-neutral-200 px-4 py-2 text-center text-sm dark:border-neutral-800 sm:w-auto">Back to products</a>
                     </div>
 
