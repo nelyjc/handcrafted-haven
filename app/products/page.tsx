@@ -2,11 +2,30 @@ import { Suspense } from "react";
 import ProductsSkeleton from "./ProductsSkeleton";
 import ProductsList from "./ProductsList";
 import ProductsFilters from "./ProductsFilters";
+import SearchSort from "./SearchSort";
+import { getAllProducts, getAllProductsPaginated } from "../lib/products";
 
 export default async function ProductsPage({ searchParams }: { searchParams?: Promise<{ page?: string }> | { page?: string } }) {
     const sp = await searchParams;
     const page = Math.max(1, Number(sp?.page || 1));
     const pageSize = 9;
+
+    // extract category and search filters from search params
+    const categories = sp?.category ? (Array.isArray(sp.category) ? sp.category : [sp.category]) : undefined;
+    const search = sp?.search ? String(sp.search) : undefined;
+    const minPrice = sp?.price_min ? Number(sp.price_min) : undefined;
+    const maxPrice = sp?.price_max ? Number(sp.price_max) : undefined;
+    const sort = sp?.sort ? String(sp.sort) : "newest";
+
+    const { products, totalCount, totalPages, pagesLeft } = await getAllProductsPaginated(page, pageSize, {
+        categories,
+        search,
+        minPrice,
+        maxPrice,
+        sort,
+    });
+
+    // console.log(products, totalCount, totalProductsOnPage, totalPages, pagesLeft);
 
     return (
         <div className="mx-auto flex flex-col md:flex-row w-full max-w-6xl gap-6 p-4 sm:p-6 text-neutral-900 dark:text-neutral-100">
@@ -32,22 +51,17 @@ export default async function ProductsPage({ searchParams }: { searchParams?: Pr
 
             <section className="flex-1">
                 <div>
-                    <div className="mb-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                        <input
-                            type="search"
-                            placeholder="Search products"
-                            className="flex-1 rounded-md bg-neutral-50 p-2 text-sm placeholder:text-neutral-400 dark:bg-neutral-900/60 dark:text-neutral-200"
-                        />
-                        <select className="rounded-md bg-neutral-50 p-2 text-xs text-neutral-500 dark:bg-neutral-900/60 dark:text-neutral-300 w-full sm:w-auto">
-                            <option>Sort</option>
-                            <option>Newest</option>
-                            <option>Price: Low to High</option>
-                            <option>Price: High to Low</option>
-                        </select>
-                    </div>
+                    <SearchSort />
 
-                    <Suspense fallback={<ProductsSkeleton pageSize={pageSize} />}>
-                        <ProductsList page={page} pageSize={pageSize} />
+                    <Suspense key={`${page}-${search}-${categories?.join(",")}-${sort}-${minPrice}-${maxPrice}`} fallback={<ProductsSkeleton pageSize={pageSize} />}>
+                        <ProductsList
+                            page={page}
+                            pageSize={pageSize}
+                            products={products}
+                            totalCount={totalCount}
+                            totalPages={totalPages}
+                            pagesLeft={pagesLeft}
+                        />
                     </Suspense>
                 </div>
             </section>
