@@ -1,0 +1,107 @@
+### -----------------------------
+### PRODUCTS
+### -----------------------------
+
+### Get all products
+GET http://localhost:3000/api/products
+
+### Get product by id
+GET http://localhost:3000/api/products/f3a5c2b1-7e4a-4f82-9d51-3b2a9f8c1004
+
+### Create product
+POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+  "sellerId": "e7c2f5b9-8a3a-4e4f-bf8d-6e5c2a9d3f03",
+  "name": "REST Test Product - Clay Spoon Rest",
+  "price": 1299,
+  "category": "ceramic",
+  "image": "/products/product-placeholder.png",
+  "shortDescription": "A small hand-thrown spoon rest for the stovetop.",
+  "longDescription": "Wheel-thrown in small batches and finished with a soft glaze. Perfect for keeping counters clean while cooking. Each one has slight variation that makes it uniquely handmade."
+}
+
+### Update product
+PATCH http://localhost:3000/api/products/5bf82d96-a799-4e7b-b269-8e7f4331f4e3
+Content-Type: application/json
+
+{
+  "price": 1499,
+}
+
+
+### Delete product
+DELETE http://localhost:3000/api/products/5bf82d96-a799-4e7b-b269-8e7f4331f4e3
+
+
+
+### -----------------------------
+### SELLERS
+### -----------------------------
+
+### Get all sellers
+GET http://localhost:3000/api/sellers
+
+### Create seller
+POST http://localhost:3000/api/sellers
+Content-Type: application/json
+
+{
+  "firstName": "REST",
+  "lastName": "Seller",
+  "username": "rest_seller_{{$timestamp}}",
+  "email": "rest_seller_{{$timestamp}}@example.com",
+  "password": "TestPassword123!",
+  "story": "I make small-batch goods with simple tools and a lot of patience.",
+  "image": "/sellers/seller-placeholder-male.png"
+}
+
+### Get seller by id
+GET http://localhost:3000/api/sellers/229ecb0e-27bb-4507-b9d5-810ae1585321
+
+### Update seller
+PATCH http://localhost:3000/api/sellers/229ecb0e-27bb-4507-b9d5-810ae1585321
+Content-Type: application/json
+
+{
+  "story": "Updated story via REST client at {{$datetime iso8601}}"
+}
+
+### Delete seller
+DELETE http://localhost:3000/api/sellers/229ecb0e-27bb-4507-b9d5-810ae1585321
+
+
+
+### -----------------------------
+### REVIEWS
+### -----------------------------
+
+### List reviews for a product
+GET http://localhost:3000/api/reviews?productId=3c2e5a4d-9f1a-4e0b-8c91-1b5d9a2f1001
+
+### Create review for a product
+POST http://localhost:3000/api/reviews
+Content-Type: application/json
+
+{
+  "productId": "3c2e5a4d-9f1a-4e0b-8c91-1b5d9a2f1001",
+  "authorName": "REST Visitor",
+  "rating": 5,
+  "comment": "Love it — created via routes.rest at {{$datetime iso8601}}"
+}
+
+### Get review by id 
+GET http://localhost:3000/api/reviews/4cd57dbf-7e2c-4ba4-99e7-cdfc71d4b629
+
+### Patch review
+PATCH http://localhost:3000/api/reviews/4cd57dbf-7e2c-4ba4-99e7-cdfc71d4b629
+Content-Type: application/json
+
+{
+  "rating": 4,
+  "comment": "Updated via REST client at {{$datetime iso8601}}"
+}
+
+### Delete review
+DELETE http://localhost:3000/api/reviews/4cd57dbf-7e2c-4ba4-99e7-cdfc71d4b629

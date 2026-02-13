@@ -17,7 +17,7 @@ export default function SellerDevPage() {
         password: "TestPassword123!",
         story:
           "I make small-batch goods with simple tools and a lot of patience.",
-        image: "/sellers/test-seller.png",
+        image: "/sellers/seller-placeholder-male.png",
       }),
     });
 

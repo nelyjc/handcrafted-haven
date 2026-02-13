@@ -1,10 +1,11 @@
-import productsData from "../../lib/products.json";
+// app/products/[id]/page.tsx
+import { StarRating } from "@/app/ui/startratings";
+import AddToCartButton from "./AddToCartButton";
+import { getProductById } from "../../lib/products";
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
     const sp = await params;
-    const id = sp.id;
-    const products = productsData as Array<any>;
-    const product = products.find((p) => String(p.id) === id);
+    const product = await getProductById(sp.id);
 
     if (!product) {
         return (
@@ -25,29 +26,41 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             <div className="flex flex-col gap-6 md:flex-row">
                 <div className="md:w-1/2">
                     <div className="aspect-square w-full overflow-hidden rounded-md bg-neutral-100 dark:bg-neutral-800">
-                        <img src={product.image} alt={product.title} className="h-full w-full object-cover" />
+                        <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
                     </div>
                 </div>
 
                 <div className="flex flex-col gap-4 md:w-1/2">
                     <div>
                         <div className="text-xs text-neutral-400 dark:text-neutral-500">{product.category}</div>
-                        <h1 className="mt-1 text-2xl font-semibold">{product.title}</h1>
-                        <div className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{product.name}</div>
+                        <h1 className="mt-1 text-2xl font-semibold">{product.name}</h1>
+                        <div className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{product.short_description}</div>
+                        {/* star rating */}
+                        {/* <StarRating rating={product.rating ?? 0} count={product.review_count ?? undefined} /> */}
+                        {/* No rating and reviews implemented yet */}
+                        <StarRating rating={0} count={undefined} />
                     </div>
 
                     <div className="mt-2">
                         <div className="text-2xl font-bold">${product.price.toFixed(2)}</div>
-                        <div className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{product.availability}</div>
+                        {/* <div className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{product.availability}</div> */}
                     </div>
 
                     <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-                        <button className="w-full rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white dark:bg-white dark:text-neutral-900 sm:w-auto">Add to cart</button>
+                    <AddToCartButton
+                        product={{
+                            id: product.id,
+                            name: product.name,
+                            price: Number(product.price),
+                            image: product.image,
+                        }}
+                        />
+
                         <a href="/products" className="w-full rounded-md border border-neutral-200 px-4 py-2 text-center text-sm dark:border-neutral-800 sm:w-auto">Back to products</a>
                     </div>
 
                     <div className="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
-                        <p>{product.description}</p>
+                        <p>{product.long_description}</p>
                     </div>
                 </div>
             </div>
