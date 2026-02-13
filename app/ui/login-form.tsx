@@ -1,8 +1,18 @@
 'use client';
 
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import { Button } from '@/app/ui/button';
+import { useActionState } from 'react';
+import { authenticate } from '@/app/lib/actions';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useEffect } from 'react';
+
+
+
 import Link from 'next/link';
 
 interface LoginFormProps {
@@ -22,6 +32,21 @@ export default function LoginForm({
   inputPadding = 'py-2 lg:py-1.5',
   buttonPadding = 'py-2.5 lg:py-2',
 }: LoginFormProps) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { update } = useSession();
+
+  const handleUpdateSession = async () => {
+    await update();
+  }
+
+  const callbackUrl = searchParams.get('callbackUrl') || '/profile';
+  const [errorMessage, formAction, isPending] = useActionState(
+    authenticate,
+    undefined,
+  );
+  
+ 
   const [showPassword, setShowPassword] = useState(false);
 
   const handleOAuthLogin = (provider: 'google' | 'apple') => {
@@ -30,10 +55,7 @@ export default function LoginForm({
 
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        console.log("login submit");
-      }}
+      action={formAction}
       className={`w-full space-y-4 lg:space-y-3 ${className}`}
     >
       {/* Header */}
@@ -98,15 +120,32 @@ export default function LoginForm({
           </div>
         </div>
 
-        
+
 
         {/* Login button */}
+        <input type="hidden" name="redirectTo" value={callbackUrl} />
         <button
           type="submit"
-          className={`w-full rounded-lg bg-orange-500 ${buttonPadding} ${textSize} font-semibold text-white hover:bg-orange-600 transition`}
+          className={`w-full rounded-lg bg-orange-500 ${buttonPadding} ${textSize} font-semibold text-white hover:bg-orange-600 transition `}
+          aria-disabled={isPending}
+
         >
           Sign In
         </button>
+
+
+        <div
+          className="flex h-8 items-end space-x-1"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {errorMessage && (
+            <>
+              <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+              <p className="text-sm text-red-500">{errorMessage}</p>
+            </>
+          )}
+        </div>
 
         {/* Divider */}
         <div className="relative my-4 lg:my-3">
