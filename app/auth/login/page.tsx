@@ -1,5 +1,7 @@
 import LoginForm from '@/app/ui/login-form';
 import Image from 'next/image';
+import { Suspense } from 'react';
+
 
 export default function RegisterPage() {
   return (
@@ -29,6 +31,7 @@ export default function RegisterPage() {
       <div className="flex w-full lg:w-2/5 items-center justify-center bg-gray-50 p-6 sm:p-8 lg:p-8 min-h-[300px] lg:h-screen">
 
         <div className="w-full max-w-md lg:max-w-md">
+          <Suspense fallback={<div className="h-64 w-full bg-gray-200 animate-pulse rounded-lg" />}>
           <LoginForm
             titleSize="text-3xl lg:text-2xl"
             subtitleSize="text-base lg:text-sm"
@@ -36,6 +39,7 @@ export default function RegisterPage() {
             inputPadding="py-3 lg:py-2"
             buttonPadding="py-3 lg:py-2.5"
           />
+          </Suspense>
         </div>
       </div>
 
