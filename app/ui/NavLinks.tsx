@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { PowerIcon } from "@heroicons/react/24/outline";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
-import CartButton from "./CartButton";   // 👈 botón del carrito
+import CartButton from "./CartButton";   
 
 interface NavLink {
   name: string;
@@ -47,7 +47,7 @@ export default function NavLinks() {
           );
         })}
 
-        {/* Botón del carrito en desktop */}
+        
         <CartButton />
 
         {status === "authenticated" ? (
@@ -127,7 +127,7 @@ export default function NavLinks() {
             </Link>
           ))}
 
-          {/* Botón del carrito en mobile */}
+          
           <CartButton />
 
           <hr className="border-black/10 dark:border-white/20" />
