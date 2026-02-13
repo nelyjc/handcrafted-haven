@@ -1,10 +1,33 @@
 'use server';
  
+import { signIn } from '@/auth';
+import { AuthError } from 'next-auth';
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { createProduct as dbCreateProduct } from "@/app/lib/products";
 import { requireSeller } from './authz';
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    
+    await signIn('credentials', formData);
+    return 'undefined';
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
+}
 
 export type ActionState =
   | { ok: true }
@@ -25,7 +48,8 @@ const CreateProductSchema = z.object({
 });
 
 export async function createDashboardProduct(
-  formData: FormData,
+  _prevState: ActionState,
+  formData: FormData
 ): Promise<ActionState> {
   const seller = await requireSeller();
   const sellerId = seller.id;
