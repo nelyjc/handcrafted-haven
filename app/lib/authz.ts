@@ -6,12 +6,12 @@ export async function requireSeller() {
   const session = await auth();
     const email = session?.user?.email;
 
-  if (!session?.user?.email) redirect("/api/auth/signin?callbackUrl=/seller");
+  if (!session?.user?.email) redirect("/auth/login");
 
   const seller = await getSellerByEmail(session.user.email);
 
   if (!seller) {
-    redirect("/register");
+    redirect("/auth/register");
   }
 
   return seller;

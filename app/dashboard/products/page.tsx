@@ -1,10 +1,10 @@
 import Link from "next/link";
-import getSellerId from "@/app/lib/data";
+import { requireSeller } from "@/app/lib/authz";
 import { getProductsBySeller } from "@/app/lib/products";
 
 export default async function ProductsDashboardPage() {
-  const sellerId = getSellerId();
-  const products = await getProductsBySeller(sellerId);
+  const seller = await requireSeller();
+  const products = await getProductsBySeller(seller.id);
 
   return (
     <section className="max-w-4xl space-y-4">
