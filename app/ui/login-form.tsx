@@ -35,9 +35,14 @@ export default function LoginForm({
   const searchParams = useSearchParams();
   const router = useRouter();
   const { update } = useSession();
+  const { data: session, status } = useSession();
 
   const handleUpdateSession = async () => {
+    console.log("Objeto completo de la sesión:", session);
     await update();
+    
+
+  
   }
 
   const callbackUrl = searchParams.get('callbackUrl') || '/profile';
@@ -46,7 +51,6 @@ export default function LoginForm({
     undefined,
   );
   
- 
   const [showPassword, setShowPassword] = useState(false);
 
   const handleOAuthLogin = (provider: 'google' | 'apple') => {
@@ -162,7 +166,8 @@ export default function LoginForm({
           <Button
             variant="outline"
             type="button"
-            onClick={() => handleOAuthLogin('google')}
+            onClick={()=>handleUpdateSession()}
+            // onClick={() => handleOAuthLogin('google')}
             className={`${textSize} px-4 ${buttonPadding}`}
           >
             <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">

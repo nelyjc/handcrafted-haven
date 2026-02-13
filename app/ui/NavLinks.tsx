@@ -6,14 +6,13 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { PowerIcon } from "@heroicons/react/24/outline";
 import { useSession } from "next-auth/react";
-import { signOut } from "next-auth/react"
+import { signOut } from "next-auth/react";
+import CartButton from "./CartButton";   // 👈 botón del carrito
 
 interface NavLink {
   name: string;
   href: string;
 }
-
-
 
 export default function NavLinks() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,8 +21,8 @@ export default function NavLinks() {
 
   const navLinks: NavLink[] = [
     { name: "Home", href: "/" },
-    { name: "Store", href: "./products" },
-    { name: "Account", href: "./profile" },
+    { name: "Store", href: "/products" },
+    { name: "Account", href: "/profile" },
   ];
 
   return (
@@ -32,7 +31,6 @@ export default function NavLinks() {
       <div className="hidden items-center gap-6 text-sm sm:flex">
         {navLinks.map((link) => {
           const isActive = pathname === link.href;
-
           return (
             <Link
               key={link.name}
@@ -48,6 +46,9 @@ export default function NavLinks() {
             </Link>
           );
         })}
+
+        {/* Botón del carrito en desktop */}
+        <CartButton />
 
         {status === "authenticated" ? (
           <button
@@ -82,16 +83,19 @@ export default function NavLinks() {
         aria-label="Toggle menu"
       >
         <span
-          className={`h-0.5 w-6 bg-zinc-900 transition-transform dark:bg-zinc-100 ${isOpen ? "translate-y-2 rotate-45" : ""
-            }`}
+          className={`h-0.5 w-6 bg-zinc-900 transition-transform dark:bg-zinc-100 ${
+            isOpen ? "translate-y-2 rotate-45" : ""
+          }`}
         />
         <span
-          className={`h-0.5 w-6 bg-zinc-900 dark:bg-zinc-100 ${isOpen ? "opacity-0" : ""
-            }`}
+          className={`h-0.5 w-6 bg-zinc-900 dark:bg-zinc-100 ${
+            isOpen ? "opacity-0" : ""
+          }`}
         />
         <span
-          className={`h-0.5 w-6 bg-zinc-900 transition-transform dark:bg-zinc-100 ${isOpen ? "-translate-y-2 -rotate-45" : ""
-            }`}
+          className={`h-0.5 w-6 bg-zinc-900 transition-transform dark:bg-zinc-100 ${
+            isOpen ? "-translate-y-2 -rotate-45" : ""
+          }`}
         />
       </button>
 
@@ -122,6 +126,9 @@ export default function NavLinks() {
               {link.name}
             </Link>
           ))}
+
+          {/* Botón del carrito en mobile */}
+          <CartButton />
 
           <hr className="border-black/10 dark:border-white/20" />
 

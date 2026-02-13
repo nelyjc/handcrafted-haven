@@ -10,6 +10,8 @@ type CartItem = {
   quantity: number;
 };
 
+
+
 type CartContextType = {
   items: CartItem[];
   addItem: (item: Omit<CartItem, "quantity">, qty?: number) => void;

@@ -4,7 +4,6 @@ import "./globals.css";
 import Footer from "./ui/footer";
 import Providers from "./providers";
 import Navbar from "./ui/navbar";
-import Providers from "./providers";
 import { auth } from "@/auth";
 
 
@@ -24,19 +23,24 @@ export const metadata: Metadata = {
   description: "Artisan goods and handcrafted designs.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+})
+
+ {
+  const session = await auth();
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <Providers session={session}>
+          <Navbar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
