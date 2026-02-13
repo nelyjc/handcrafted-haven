@@ -1,36 +1,10 @@
 'use server';
  
-import { signIn } from '@/auth';
-import { AuthError } from 'next-auth';
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-import { getSellerById, updateSeller } from "@/app/lib/sellers";
 import { createProduct as dbCreateProduct } from "@/app/lib/products";
-import { id } from 'zod/v4/locales';
-import getSellerId from './data';
-
- 
- 
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData,
-) {
-  try {
-    await signIn('credentials', formData);
-    return 'undefined';
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Invalid credentials.';
-        default:
-          return 'Something went wrong.';
-      }
-    }
-    throw error;
-  }
-}
+import { requireSeller } from './authz';
 
 export type ActionState =
   | { ok: true }
@@ -51,9 +25,11 @@ const CreateProductSchema = z.object({
 });
 
 export async function createDashboardProduct(
-  _prevState: ActionState | undefined,
   formData: FormData,
 ): Promise<ActionState> {
+  const seller = await requireSeller();
+  const sellerId = seller.id;
+  
   const parsed = CreateProductSchema.safeParse({
     name: formData.get("name"),
     priceDollars: formData.get("priceDollars"),
@@ -78,7 +54,6 @@ export async function createDashboardProduct(
   const priceCents = Math.round(priceDollars * 100);
 
   try {
-    const sellerId = getSellerById(sellerId())?.id;
     await dbCreateProduct({
       sellerId,
       name,
@@ -100,35 +75,3 @@ const UpdateStorySchema = z.object({
   story: z.string().min(10, "Story must be at least 10 characters."),
   image: z.string().optional(),
 });
-
-export async function updateDashboardSellerProfile(
-  _prevState: ActionState | undefined,
-  formData: FormData,
-): Promise<ActionState> {
-  const parsed = UpdateStorySchema.safeParse({
-    story: formData.get("story"),
-    image: formData.get("image") || undefined,
-  });
-
-  if (!parsed.success) {
-    return {
-      ok: false,
-      message: "Please fix the errors and try again.",
-      fieldErrors: parsed.error.flatten().fieldErrors,
-    };
-  }
-
-  const sellerId = getSellerId();
-
-  try {
-    await updateSeller(sellerId, {
-      story: parsed.data.story,
-      image: parsed.data.image,
-    });
-  } catch (e) {
-    return { ok: false, message: "Database error: failed to update profile." };
-  }
-
-  revalidatePath("/dashboard/profile");
-  redirect("/dashboard/profile");
-}
