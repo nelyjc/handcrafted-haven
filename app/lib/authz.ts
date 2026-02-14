@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { auth } from "@/auth";
 import { getSellerByEmail } from "@/app/lib/sellers";
 
 export async function requireSeller() {

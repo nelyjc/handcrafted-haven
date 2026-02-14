@@ -42,7 +42,7 @@ export default function LoginForm({
     await update();
   }
 
-  const callbackUrl = searchParams.get('callbackUrl') || '/profile';
+  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard/profile';
   const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
     undefined,
