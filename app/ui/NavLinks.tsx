@@ -22,7 +22,7 @@ export default function NavLinks() {
   const navLinks: NavLink[] = [
     { name: "Home", href: "/" },
     { name: "Store", href: "/products" },
-    { name: "Account", href: "/profile" },
+    { name: "Account", href: "/dashboard/profile" },
   ];
 
   return (
