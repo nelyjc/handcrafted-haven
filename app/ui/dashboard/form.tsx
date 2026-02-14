@@ -12,7 +12,7 @@ export function Form() {
   return (
 <div>
       <h1 className="text-2xl font-bold">Add Product</h1>
-      {!state.ok && state.message && <p className="text-red-500">{state.message}</p>}
+      {!state.ok && state.message && <p className="text-red-500">{state.message}</p> : null}
       <form
         action={formAction}
         className="space-y-4 rounded-lg border p-6 slate-100 shadow-md"
