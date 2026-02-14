@@ -5,6 +5,7 @@ import { StarRating } from "./ProductRating";
 
 
 
+
 async function wait(ms: number) {
     return new Promise((res) => setTimeout(res, ms));
 }
@@ -37,6 +38,7 @@ export default async function ProductsList({
                         <div className="mt-1">
                             {/* rating is ALWAYS a number */}
                             <StarRating rating={product.rating ?? 0} count={product.review_count ?? undefined} />
+
                         </div>
 
                         <div className="space-y-1">

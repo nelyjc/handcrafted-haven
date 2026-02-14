@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function AddToCartButton({
   product,
 }: {
-  product: { id: string; name: string; price: number; image?: string };
+  product: { id: string; name: string; price: number; image: string };
 }) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
@@ -14,7 +14,6 @@ export default function AddToCartButton({
   function handleClick() {
     addItem(product, 1);
     setAdded(true);
-
     setTimeout(() => setAdded(false), 1200);
   }
 
