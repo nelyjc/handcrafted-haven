@@ -27,13 +27,7 @@ export default function RegisterPage() {
             </div>
             <div className="flex w-full lg:w-2/5 items-center justify-center bg-gray-50 p-6 sm:p-8 lg:p-8 min-h-[300px] lg:h-screen">
                 <div className="w-full max-w-md lg:max-w-md">
-                    <RegisterForm
-                        titleSize="text-2xl lg:text-xl"
-                        subtitleSize="text-base lg:text-sm"
-                        textSize="text-base"
-                        inputPadding="py-2 lg:py-2.5"
-                        buttonPadding="py-2 lg:py-2.5"
-                    />
+                    <RegisterForm/>
                 </div>
             </div>
 
