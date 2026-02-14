@@ -15,21 +15,21 @@ export const authConfig = {
       return true;
     },
 
-    // 👇 Aquí agregas el id del usuario a la sesión
+  
     async session({ session, token }) {
       if (session.user && token.sub) {
-        session.user.id = token.sub; // token.sub es el user.id de la DB
+        session.user.id = token.sub; 
       }
       return session;
     },
 
-    // 👇 Opcional: asegurar que el JWT tenga el id
+  
     async jwt({ token, user }) {
       if (user) {
-        token.sub = user.id; // user.id viene de authorize()
+        token.sub = user.id; 
       }
       return token;
     },
   },
-  providers: [], // tus providers
+  providers: [], 
 } satisfies NextAuthConfig;
