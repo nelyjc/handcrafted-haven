@@ -11,7 +11,7 @@ export default async function ProfilePage() {
       <header className="bg-cyan-900 text-white p-4">
         <div className="grid grid-cols-2 items-center gap-2 m-4">
           <img className="rounded-full" src={seller.image} alt="Profile Picture" width={150} height={150} />
-          <h1 className="text-2xl text-cyan-900 font-bold">{seller?.username ? `Welcome, ${seller.username}` : "Welcome, Artisan"}</h1>
+          <h1 className="text-2xl text-stone-300 font-bold">{seller?.username ? `Welcome, ${seller.username}` : "Welcome, Artisan"}</h1>
         </div>
       </header>
       <div>
