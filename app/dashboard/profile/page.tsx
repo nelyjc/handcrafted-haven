@@ -23,14 +23,26 @@ export default async function ProfilePage() {
         {products.length === 0 ? (
           <p>You have no products yet.</p>
         ) : (
-          <ul>
-            {products.map((p) => (
-              <li key={p.id}>{p.name}</li>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {products.map((product) => (
+              <div key={product.id} className="flex flex-col gap-3 rounded-md bg-neutral-50 p-3 dark:bg-neutral-900/60">
+                <div className="aspect-square overflow-hidden rounded-md bg-neutral-100 dark:bg-neutral-800">
+                  <img src={product.image} alt={product.short_description} className="h-full w-full object-cover" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-sm font-semibold">{product.name}</span>
+                  <br />
+                  <span className="text-xs text-neutral-400 dark:text-neutral-500">{product.short_description}</span>
+                </div>
+                <div className="mt-auto flex items-center justify-between gap-2 text-xs">
+                  <div className="text-sm font-medium">${product.price.toFixed(2)}</div>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
     </main>
-      
+
   );
 }
