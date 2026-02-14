@@ -110,7 +110,7 @@ export async function createDashboardProduct(
   
   const parsed = CreateProductSchema.safeParse({
     name: formData.get("name"),
-    priceDollars: formData.get("priceDollars"),
+    priceDollars: formData.get("price"),
     category: formData.get("category"),
     shortDescription: formData.get("shortDescription"),
     longDescription: formData.get("longDescription"),
