@@ -38,14 +38,11 @@ export default function LoginForm({
   const { data: session, status } = useSession();
 
   const handleUpdateSession = async () => {
-    console.log("Objeto completo de la sesión:", session);
+    console.log("session Data:", session);
     await update();
-    
-
-  
   }
 
-  const callbackUrl = searchParams.get('callbackUrl') || '/profile';
+  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard/profile';
   const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
     undefined,
