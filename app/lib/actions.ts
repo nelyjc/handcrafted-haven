@@ -14,7 +14,7 @@ import bcrypt from "bcryptjs";
 import { createSeller, getSellerByEmail } from "./sellers";
 
 export async function registerSeller(
-  prevState: string | undefined,
+  prevState: { success: boolean; message?: string } | undefined,
   formData: FormData,
 ) {
   try {
@@ -22,22 +22,23 @@ export async function registerSeller(
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const confirmPassword = formData.get("confirmPassword") as string;
+    const userName = formData.get("username") as string;
 
-    if (!name || !email || !password || !confirmPassword) {
-      return "All fields are required.";
+    if (!name || !email || !password || !confirmPassword || !userName) {
+      return { success: false, message: "All fields are required." };
     }
 
     if (password.length < 6) {
-      return "Password must be at least 6 characters.";
+      return { success: false, message: "Password must be at least 6 characters." };
     }
 
     if (password !== confirmPassword) {
-      return "Passwords do not match.";
+      return { success: false, message: "Passwords do not match." };
     }
 
     const existingUser = await getSellerByEmail(email);
     if (existingUser) {
-      return "Email already registered.";
+      return { success: false, message: "Email already registered." };
     }
 
     const passwordHash = await bcrypt.hash(password, 12);
@@ -48,17 +49,18 @@ export async function registerSeller(
     await createSeller({
       firstName,
       lastName,
-      username: email.split("@")[0],
+      username: userName,
       email,
       passwordHash,
       story: "",
       image: "",
     });
 
-    return "success";
+    return { success: true };
+
   } catch (error) {
     console.error(error);
-    return "Something went wrong.";
+    return { success: false, message: "Something went wrong." };
   }
 }
  
