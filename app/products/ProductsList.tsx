@@ -5,6 +5,7 @@ import { StarRating } from "./ProductRating";
 
 
 
+
 async function wait(ms: number) {
     return new Promise((res) => setTimeout(res, ms));
 }
@@ -29,7 +30,6 @@ export default async function ProductsList({
         <>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {products.map((product) => (
-                    console.log(product),
                     <div key={product.id} className="flex flex-col gap-3 rounded-md bg-neutral-50 p-3 dark:bg-neutral-900/60">
                         <div className="aspect-square overflow-hidden rounded-md bg-neutral-100 dark:bg-neutral-800">
                             <img src={product.image} alt={product.title} className="h-full w-full object-cover" />
@@ -37,6 +37,7 @@ export default async function ProductsList({
                         <div className="mt-1">
                             {/* rating is ALWAYS a number */}
                             <StarRating rating={product.rating ?? 0} count={product.review_count ?? undefined} />
+
                         </div>
 
                         <div className="space-y-1">

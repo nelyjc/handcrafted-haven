@@ -1,11 +1,21 @@
 // app/products/[id]/page.tsx
-import { StarRating } from "@/app/ui/startratings";
+import { StarRating } from "@/app/ui/StarRating";
 import AddToCartButton from "./AddToCartButton";
 import { getProductById } from "../../lib/products";
+
+import ReviewForm from "./ReviewForm";
+import ReviewList from "./ReviewList";
+import { getReviewsByProduct, getReviewSummaryByProduct } from "@/app/lib/reviews";
+
+
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
     const sp = await params;
     const product = await getProductById(sp.id);
+    const reviewSummary = await getReviewSummaryByProduct(sp.id);
+    const productReviews = await getReviewsByProduct(sp.id);
+
+
 
     if (!product) {
         return (
@@ -36,9 +46,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                         <h1 className="mt-1 text-2xl font-semibold">{product.name}</h1>
                         <div className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{product.short_description}</div>
                         {/* star rating */}
-                        {/* <StarRating rating={product.rating ?? 0} count={product.review_count ?? undefined} /> */}
-                        {/* No rating and reviews implemented yet */}
-                        <StarRating rating={0} count={undefined} />
+                        <StarRating rating={reviewSummary.rating} count={reviewSummary.count} />
+
+
                     </div>
 
                     <div className="mt-2">
@@ -61,6 +71,10 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
                     <div className="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
                         <p>{product.long_description}</p>
+                        <ReviewForm productId={sp.id} />
+                        <ReviewList reviews={productReviews} />
+
+
                     </div>
                 </div>
             </div>

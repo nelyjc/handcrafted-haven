@@ -242,3 +242,15 @@ export async function deleteProduct(id: string) {
         WHERE id = ${id};
     `;
 }
+export async function getAllProductsWithRatings() {
+  return sql`
+    SELECT
+      p.*,
+      COALESCE(AVG(r.rating), 0) AS rating,
+      COUNT(r.id)::int AS review_count
+    FROM products p
+    LEFT JOIN reviews r ON r.product_id = p.id
+    GROUP BY p.id
+    ORDER BY p.created_at DESC;
+  `;
+}
