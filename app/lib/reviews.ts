@@ -88,3 +88,21 @@ export async function deleteReview(id: string) {
     WHERE id = ${id};
   `;
 }
+
+/* ======================
+    OTHER
+====================== */
+export async function getReviewSummaryByProduct(productId: string) {
+  const result = await sql`
+    SELECT
+      COALESCE(AVG(rating), 0) AS avg,
+      COUNT(*)::int AS count
+    FROM reviews
+    WHERE product_id = ${productId};
+  `;
+
+  return {
+    rating: Number(result[0]?.avg ?? 0),
+    count: Number(result[0]?.count ?? 0),
+  };
+}

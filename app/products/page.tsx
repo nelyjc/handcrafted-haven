@@ -3,7 +3,10 @@ import ProductsSkeleton from "./ProductsSkeleton";
 import ProductsList from "./ProductsList";
 import ProductsFilters from "./ProductsFilters";
 import SearchSort from "./SearchSort";
-import { getAllProducts, getAllProductsPaginated } from "../lib/products";
+import { getAllProductsPaginated } from "../lib/products";
+import { getReviewSummaryByProduct } from "../lib/reviews";
+
+
 
 type SearchParams = Record<string, string | string[] | undefined> | Promise<Record<string, string | string[] | undefined>>;
 
@@ -26,7 +29,20 @@ export default async function ProductsPage({ searchParams }: { searchParams?: Se
         maxPrice,
         sort,
     });
+    // fetch ratings for all products on the page in parallel
+    const productsWithRatings = await Promise.all(
+        products.map(async (p: any) => {
+    const summary = await getReviewSummaryByProduct(p.id);
+        return {
+        ...p,
+        rating: summary.rating,
+        review_count: summary.count,
+        };
+        }),
+        );
 
+
+    
     // console.log(products, totalCount, totalProductsOnPage, totalPages, pagesLeft);
 
     return (
@@ -59,7 +75,7 @@ export default async function ProductsPage({ searchParams }: { searchParams?: Se
                         <ProductsList
                             page={page}
                             pageSize={pageSize}
-                            products={products}
+                            products={productsWithRatings}
                             totalCount={totalCount}
                             totalPages={totalPages}
                             pagesLeft={pagesLeft}

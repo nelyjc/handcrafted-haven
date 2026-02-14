@@ -6,7 +6,7 @@ type CartItem = {
   id: string;            // product UUID
   name: string;
   price: number;         // number (use cents if you store cents)
-  image?: string;
+  image: string;
   quantity: number;
 };
 
