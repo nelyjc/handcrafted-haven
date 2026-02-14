@@ -4,6 +4,11 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import { Button } from '@/app/ui/button';
 import Link from 'next/link';
+import { useActionState } from "react";
+import { registerSeller } from "@/app/lib/actions";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface RegisterFormProps {
     className?: string;
@@ -24,19 +29,39 @@ export default function RegisterForm({
 }: RegisterFormProps) {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    
+
     const handleOAuthRegister = (provider: 'google' | 'apple') => {
         console.log(`OAuth register with ${provider}`);
     };
+    const router = useRouter();
+
+const [errorMessage, formAction, isPending] = useActionState(
+    registerSeller,
+    undefined
+);
+
+useEffect(() => {
+    if (errorMessage === "success") {
+        const autoLogin = async () => {
+            const form = document.querySelector("form") as HTMLFormElement;
+            const formData = new FormData(form);
+
+            await signIn("credentials", {
+                email: formData.get("email"),
+                password: formData.get("password"),
+                redirect: false,
+            });
+
+            router.refresh();
+            router.push("/profile");
+        };
+
+        autoLogin();
+    }
+}, [errorMessage]);
 
     return (
-        <form 
-            onSubmit={(e) => { 
-                e.preventDefault();
-                console.log("register submit");
-            }}
-            className={`w-full space-y-4 lg:space-y-3 ${className}`}
-        >
+        <form action={formAction} className={`w-full space-y-4 ${className}`}>
             {/* Header */}
             <header className="text-center space-y-1">
                 <h1 className={`${titleSize} font-bold text-gray-900`}>
@@ -51,7 +76,7 @@ export default function RegisterForm({
             <div className="w-full space-y-3 lg:space-y-2">
                 {/* NAME */}
                 <div>
-                    <label 
+                    <label
                         className={`block mb-1 ${textSize} font-semibold text-gray-900`}
                         htmlFor="name"
                     >
@@ -69,7 +94,7 @@ export default function RegisterForm({
 
                 {/* Email */}
                 <div>
-                    <label 
+                    <label
                         className={`block mb-1 ${textSize} font-semibold text-gray-900`}
                         htmlFor="email"
                     >
@@ -87,7 +112,7 @@ export default function RegisterForm({
 
                 {/* Password */}
                 <div>
-                    <label 
+                    <label
                         className={`block mb-1 ${textSize} font-semibold text-gray-900`}
                         htmlFor='password'
                     >
@@ -119,7 +144,7 @@ export default function RegisterForm({
 
                 {/* Confirm Password */}
                 <div>
-                    <label 
+                    <label
                         className={`block mb-1 ${textSize} font-semibold text-gray-900`}
                         htmlFor='confirmPassword'
                     >
@@ -148,7 +173,9 @@ export default function RegisterForm({
                         </button>
                     </div>
                 </div>
-
+                {errorMessage && errorMessage !== "success" && (
+                    <p className="text-red-500 text-sm">{errorMessage}</p>
+                )}
                 {/* Submit button */}
                 <button
                     type="submit"

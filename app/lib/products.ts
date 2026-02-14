@@ -130,13 +130,25 @@ export async function getProductById(id: string): Promise<Product | null> {
   return product;
 }
 
-export async function getProductsBySeller(sellerId: string) {
-  return sql`
+export async function getProductsBySeller(sellerId: string): Promise<Product[]> {
+  const result = await sql`
     SELECT *
     FROM products
     WHERE seller_id = ${sellerId}
     ORDER BY created_at DESC;
   `;
+
+  return result.map((row: any) => ({
+    id: row.id,
+    seller_id: row.seller_id,
+    name: row.name,
+    price: Number(row.price) / 100, // convert cents to dollars to match the way price is handled in add products
+    category: row.category,
+    image: row.image,
+    short_description: row.short_description,
+    long_description: row.long_description,
+    created_at: row.created_at.toISOString(),
+  }));
 }
 
 /* ======================
