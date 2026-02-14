@@ -5,7 +5,7 @@ export function StarRating({
   rating: number;
   count?: number;
 }) {
-  const rounded = Math.round(rating * 10) / 10; // 1 decimal
+  const rounded = Math.round(rating * 10) / 10;  // 1 decimal
   const fullStars = Math.floor(rounded);
 
   return (
